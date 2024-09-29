@@ -1,63 +1,59 @@
-'use strict';
+'use strict'
 
-import { WidgetHandler } from "./lib/widgets/widgetHandler";
+import { WidgetHandler } from './lib/widgets/widgetHandler'
 
-const { MenuHelper } = require('./helper/menuHelper');
-const { ConfigHelper } = require('./helper/configHelper');
+const { MenuHelper } = require('./helper/menuHelper')
+const { ConfigHelper } = require('./helper/configHelper')
 
-const { AccessRightsHelper } = require('./helper/accessRightsHelper');
-const {InstallStepper} = require("./lib/installStepper/installStepper");
+const { AccessRightsHelper } = require('./helper/accessRightsHelper')
+const { InstallStepper } = require('./lib/installStepper/installStepper')
 
 module.exports = function (sails) {
+  let libInitialize = require('./lib/initialize')
 
-    let libInitialize =  require("./lib/initialize");
+  return {
+    /**
+     * Creating default settings for hook
+     */
+    defaults: require('./lib/defaults').defaults(),
 
-    return {
+    configure: require('./lib/configure').default(),
 
-        /**
-         * Creating default settings for hook
-         */
-        defaults: require('./lib/defaults').defaults(),
+    initialize: async function initialize(cb) {
+      await libInitialize.default(sails, cb)
+    },
 
-        configure: require('./lib/configure').default(),
+    addMenuItem: function (link, label, icon, group) {
+      if (!link) throw 'first argument is required'
 
-        initialize: async function initialize(cb) {
-            await libInitialize.default(sails, cb);
-        },
+      sails.config.adminpanel.menu = sails.config.adminpanel.menu || {}
+      sails.config.adminpanel.menu.actions = sails.config.adminpanel.menu.actions || []
+      sails.config.adminpanel.menu.actions.push({
+        link: link,
+        title: label || link,
+        icon: icon,
+        menuGroup: group,
+      })
 
-        addMenuItem: function (link, label, icon, group) {
-            if (!link)
-                throw 'first argument is required';
+      sails.config.views.locals.adminpanel.menuHelper = new MenuHelper(sails.config.adminpanel)
+    },
 
-            sails.config.adminpanel.menu = sails.config.adminpanel.menu || {};
-            sails.config.adminpanel.menu.actions = sails.config.adminpanel.menu.actions || [];
-            sails.config.adminpanel.menu.actions.push({
-                link: link,
-                title: label || link,
-                icon: icon,
-                menuGroup: group
-            });
+    addGroup: function (key, title) {
+      if (!key) throw 'first argument is required'
 
-            sails.config.views.locals.adminpanel.menuHelper = new MenuHelper(sails.config.adminpanel);
-        },
-
-        addGroup: function (key, title) {
-            if (!key)
-                throw 'first argument is required';
-
-            sails.config.adminpanel.menu = sails.config.adminpanel.menu || {};
-            sails.config.adminpanel.menu.groups = sails.config.adminpanel.menu.groups || [];
-            sails.config.adminpanel.menu.groups.push({
-                key: key,
-                title: title || key,
-            });
-        },
-        addModelConfig: ConfigHelper.addModelConfig,
-        registerAccessToken: AccessRightsHelper.registerToken,
-        getAllAccessTokens: AccessRightsHelper.getTokens,
-        havePermission: AccessRightsHelper.havePermission,
-        enoughPermissions: AccessRightsHelper.enoughPermissions,
-        getInstallStepper: () => InstallStepper,
-        getWidgetHandler: () => WidgetHandler, 
-    };
-};
+      sails.config.adminpanel.menu = sails.config.adminpanel.menu || {}
+      sails.config.adminpanel.menu.groups = sails.config.adminpanel.menu.groups || []
+      sails.config.adminpanel.menu.groups.push({
+        key: key,
+        title: title || key,
+      })
+    },
+    addModelConfig: ConfigHelper.addModelConfig,
+    registerAccessToken: AccessRightsHelper.registerToken,
+    getAllAccessTokens: AccessRightsHelper.getTokens,
+    havePermission: AccessRightsHelper.havePermission,
+    enoughPermissions: AccessRightsHelper.enoughPermissions,
+    getInstallStepper: () => InstallStepper,
+    getWidgetHandler: () => WidgetHandler,
+  }
+}

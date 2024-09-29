@@ -24,5 +24,14 @@ nbproject
 .node_history
 #new_layouts
 ejs2
-package-lock.json
 dist
+
+package-lock.json
+yarn.lock
+bun.lockb
+
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
