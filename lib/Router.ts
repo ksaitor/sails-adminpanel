@@ -20,20 +20,40 @@ import { widgetsDB } from "./widgets/widgetHandler";
 import { widgetInfoController } from '../controllers/widgets/Info';
 import { widgetActionController } from '../controllers/widgets/Action';
 import { widgetCustomController } from "../controllers/widgets/Custom";
-import { debounce } from "utils-decorators";
 import { catalogController } from "../controllers/catalog/Catalog";
 
 
 export default class Router {
 
   static onlyOnce: boolean = false;
+  private static bindTimeout: NodeJS.Timeout | null = null;
+  private static bindCalled: boolean = false;
 
 
   /**
    * The idea is that all methods within the first 3 seconds after start call this method, and as soon as all have been loaded, the loading will be blocked
+   * Debounced with 5 second delay
    */
-  @debounce(5000)
   static bind(): void {
+    // Debounce implementation - wait 5 seconds before executing
+    if (this.bindTimeout) {
+      clearTimeout(this.bindTimeout);
+    }
+
+    if (this.bindCalled) {
+      return;
+    }
+
+    this.bindTimeout = setTimeout(() => {
+      this._executeBind();
+    }, 5000);
+  }
+
+  private static _executeBind(): void {
+    if (this.bindCalled) {
+      return;
+    }
+    this.bindCalled = true;
     if (this.onlyOnce) {
       sails.log.error(`This method allowed for run only one time`);
       return;
