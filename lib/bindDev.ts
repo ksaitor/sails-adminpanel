@@ -33,6 +33,11 @@ export function autoExposeModels(adminpanelConfig) {
         const model = sails.models[modelname];
         const modelName = model.globalId;
 
+        // Skip if model doesn't have a globalId
+        if (!modelName) {
+            return;
+        }
+
         // Skip if model is in exclusion list (case-insensitive)
         if (excludeModels.some(excluded => excluded.toLowerCase() === modelname.toLowerCase())) {
             return;
