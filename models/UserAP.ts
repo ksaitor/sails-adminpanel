@@ -13,7 +13,6 @@ import { WidgetConfig } from '../lib/widgets/widgetHandler'
 let passwordHash = require('password-hash')
 
 let attributes = {
-  id: { type: 'number', autoIncrement: true } as unknown as number,
   login: { type: 'string', required: true, unique: true } as unknown as string,
   fullName: { type: 'string', required: true } as unknown as string,
   email: 'string',
@@ -52,7 +51,6 @@ let model = {
 }
 
 module.exports = {
-  primaryKey: 'id',
   attributes: attributes,
   ...model,
 }

@@ -1,10 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 let attributes = {
-    id: {
-        type: 'number',
-        autoIncrement: true
-    },
     name: {
         type: "string",
         required: true,
@@ -25,7 +21,6 @@ let model = {
     }
 };
 module.exports = {
-    primaryKey: "id",
     attributes: attributes,
     ...model,
 };

@@ -42,7 +42,7 @@ export default async function(req, res) {
         for (let key in req.body) {
             if (key.startsWith("group-checkbox-") && req.body[key] === "on") {
                 for (let group of groups) {
-                    if (group.id == key.slice(15)) {
+                    if (String(group.id) === key.slice(15)) {
                         userGroups.push(group.id)
                     }
                 }

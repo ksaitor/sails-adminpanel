@@ -29,7 +29,7 @@ export class ConfigHelper {
      * @returns {boolean}
      */
     public static isId(field, modelOrName): boolean {
-        return (field.config.key == this.getIdentifierField(modelOrName));
+        return (String(field.config.key) === String(this.getIdentifierField(modelOrName)));
     }
 
     /**

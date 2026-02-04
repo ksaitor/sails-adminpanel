@@ -29,7 +29,7 @@ class ConfigHelper {
      * @returns {boolean}
      */
     static isId(field, modelOrName) {
-        return (field.config.key == this.getIdentifierField(modelOrName));
+        return (String(field.config.key) === String(this.getIdentifierField(modelOrName)));
     }
     /**
      * Get configured `identifierField` from adminpanel configuration.

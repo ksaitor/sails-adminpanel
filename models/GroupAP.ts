@@ -4,7 +4,6 @@ import UserAP from './UserAP'
 import { OptionalAll } from '../interfaces/toolsTS'
 
 let attributes = {
-  id: { type: 'number', autoIncrement: true } as unknown as number,
   name: { type: 'string', required: true, unique: true } as unknown as string,
   description: 'string',
   tokens: { type: 'json' } as unknown as string[],
@@ -22,7 +21,6 @@ let model = {
 }
 
 module.exports = {
-  primaryKey: 'id',
   attributes: attributes,
   ...model,
 }

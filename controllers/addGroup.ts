@@ -37,7 +37,7 @@ export default async function addGroup(req, res) {
         for (let key in req.body) {
             if (key.startsWith("user-checkbox-") && req.body[key] === "on") {
                 for (let user of users) {
-                    if (user.id == key.slice(14)) {
+                    if (String(user.id) === key.slice(14)) {
                         usersInThisGroup.push(user.id)
                     }
                 }
@@ -45,7 +45,7 @@ export default async function addGroup(req, res) {
 
             if (key.startsWith("token-checkbox-") && req.body[key] === "on") {
                 for (let token of allTokens) {
-                    if (token.id == key.slice(15)) {
+                    if (String(token.id) === key.slice(15)) {
                         tokensOfThisGroup.push(token.id)
                     }
                 }

@@ -2,10 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 let passwordHash = require('password-hash');
 let attributes = {
-    id: {
-        type: 'number',
-        autoIncrement: true
-    },
     login: {
         type: 'string',
         required: true,
@@ -46,7 +42,6 @@ let model = {
     /** ... Any model methods here ... */
 };
 module.exports = {
-    primaryKey: "id",
     attributes: attributes,
     ...model,
 };
