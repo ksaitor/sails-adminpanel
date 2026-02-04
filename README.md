@@ -56,7 +56,48 @@ npm install sails-adminpanel
 Then you will need to create a config file for the admin panel generator into `config/adminpanel.js`
 For use Typescript look below
 
-This is an example of this file:
+#### Option 1: Auto-Expose All Models (Recommended)
+
+The easiest way to get started is to auto-expose all your models and then exclude/customize what you don't want:
+
+```javascript
+'use strict';
+
+module.exports.adminpanel = {
+    // Enable auto-exposure of all models
+    autoExposeModels: true,
+
+    // Optional: Exclude specific models (defaults to ['userap', 'groupap', 'archive'])
+    excludeModels: ['userap', 'groupap', 'archive', 'secretmodel'],
+
+    // Optional: Hide specific attributes globally
+    hideAttributes: ['password', 'passwordHashed', 'createdAt', 'updatedAt'],
+
+    // Optional: Customize specific models (overrides auto-generated config)
+    models: {
+        user: {
+            title: 'Users',
+            model: 'User',
+            icon: 'user',
+            // ... custom field configuration
+        }
+    }
+};
+```
+
+With `autoExposeModels: true`, all your models will automatically appear in the admin panel with:
+- Auto-generated human-readable titles (e.g., `UserProfile` → "User Profile")
+- All model attributes exposed as fields
+- Default CRUD operations enabled
+
+You can then:
+- Use `excludeModels` to hide entire models
+- Use `hideAttributes` to hide specific fields globally (like passwords, timestamps)
+- Override the auto-generated config for specific models in the `models` object
+
+#### Option 2: Manual Configuration
+
+If you prefer explicit control, list each model manually:
 
 ```javascript
 'use strict';

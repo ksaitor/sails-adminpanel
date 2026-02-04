@@ -1,7 +1,7 @@
 import bindTranslations from "./bindTranslations";
 import bindAuthorization from './bindAuthorization';
 import bindAccessRights from "./bindAccessRights";
-import bindDev from "./bindDev";
+import bindDev, { autoExposeModels } from "./bindDev";
 import bindForms from "./bindForms";
 import bindDashboardWidgets from "./bindDashboardWidgets";
 import Router from "./Router";
@@ -22,6 +22,11 @@ export default async function () {
         sails.config.adminpanel.models = {...sails.config.adminpanel.instances}
         //@ts-ignore
         delete sails.config.adminpanel.instances;
+    }
+
+    // Auto-expose all models if enabled
+    if (sails.config.adminpanel.autoExposeModels === true) {
+        autoExposeModels(sails.config.adminpanel);
     }
 
     if ((process.env.DEV && process.env.NODE_ENV !== 'production') || process.env.ADMINPANEL_FORCE_BIND_DEV === "TRUE") {
