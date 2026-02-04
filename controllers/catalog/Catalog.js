@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAction = exports.catalogController = void 0;
+exports.catalogController = catalogController;
+exports.getAction = getAction;
 const CatalogHandler_1 = require("./CatalogHandler");
 async function catalogController(req, res) {
     if (sails.config.adminpanel.auth) {
@@ -12,7 +13,7 @@ async function catalogController(req, res) {
     const id = req.param('id') ? req.param('id') : '';
     const method = req.method.toUpperCase();
     if (method === 'GET') {
-        return res.viewAdmin('catalog', { entity: "entity", slug: slug, id: id });
+        return res.viewAdmin('catalog', { entity: 'entity', slug: slug, id: id });
     }
     if (method === 'POST' || method === 'PUT') {
         const data = req.body;
@@ -28,11 +29,11 @@ async function catalogController(req, res) {
                         return res.json(catalog.getAddHTML(item));
                     case 'getCatalog':
                         return res.json({
-                            'items': catalog.getItems(),
-                            'catalog': await catalog.getCatalog()
+                            items: catalog.getItems(),
+                            catalog: await catalog.getCatalog(),
                         });
                     case 'createItem':
-                        return res.json({ 'data': await catalog.createItem(item, data.data) });
+                        return res.json({ data: await catalog.createItem(item, data.data) });
                     case 'getChilds':
                         return res.json({ data: await catalog.getChilds(data.data) });
                     case 'getCreatedItems':
@@ -55,7 +56,6 @@ async function catalogController(req, res) {
         }
     }
 }
-exports.catalogController = catalogController;
 async function getAction(req, res) {
     if (sails.config.adminpanel.auth) {
         if (!req.session.UserAP) {
@@ -68,4 +68,3 @@ async function getAction(req, res) {
         const catalog = CatalogHandler_1.CatalogHandler.getCatalog(body.slug);
     }
 }
-exports.getAction = getAction;

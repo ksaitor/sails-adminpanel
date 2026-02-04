@@ -2,29 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 let passwordHash = require('password-hash');
 let attributes = {
-    login: {
-        type: 'string',
-        required: true,
-        unique: true
-    },
-    fullName: {
-        type: 'string',
-        required: true
-    },
-    email: "string",
+    login: { type: 'string', required: true, unique: true },
+    fullName: { type: 'string', required: true },
+    email: 'string',
     passwordHashed: 'string',
     password: 'string',
-    timezone: "string",
-    expires: "string",
-    locale: "string",
-    isDeleted: "boolean",
-    isActive: "boolean",
-    isAdministrator: "boolean",
-    groups: {
-        collection: "groupap",
-        via: "users"
-    },
-    widgets: 'json'
+    timezone: 'string',
+    expires: 'string',
+    locale: 'string',
+    isDeleted: 'boolean',
+    isActive: 'boolean',
+    isAdministrator: 'boolean',
+    groups: { collection: 'groupap', via: 'users' },
+    widgets: 'json',
 };
 let model = {
     beforeCreate: (values, next) => {
@@ -38,7 +28,7 @@ let model = {
             values.password = 'masked';
         }
         return next();
-    }
+    },
     /** ... Any model methods here ... */
 };
 module.exports = {

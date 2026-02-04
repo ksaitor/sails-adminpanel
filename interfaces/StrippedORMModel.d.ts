@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Callback } from "waterline";
 /**
  * As we generate adminpanel by models from config, we cannot pass model in generic

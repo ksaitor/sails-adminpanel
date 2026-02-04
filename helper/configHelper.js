@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConfigHelper = void 0;
-const Router_1 = require("../lib/Router");
+const Router_1 = __importDefault(require("../lib/Router"));
 const defaults_1 = require("../lib/defaults");
 class ConfigHelper {
     static addModelConfig(modelConfig) {

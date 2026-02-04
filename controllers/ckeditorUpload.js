@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = upload;
 const adminUtil_1 = require("../lib/adminUtil");
 const accessRightsHelper_1 = require("../helper/accessRightsHelper");
 function upload(req, res) {
@@ -44,4 +45,3 @@ function upload(req, res) {
         });
     }
 }
-exports.default = upload;

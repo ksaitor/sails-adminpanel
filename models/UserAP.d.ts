@@ -4,13 +4,12 @@
  * @description :: User for authorization in adminpanel
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
-import WaterlineModel from "../interfaces/waterlineModel";
-import WaterlineEntity from "../interfaces/waterlineORM";
-import GroupAP from "./GroupAP";
-import { OptionalAll } from "../interfaces/toolsTS";
-import { WidgetConfig } from "../lib/widgets/widgetHandler";
+import WaterlineModel from '../interfaces/waterlineModel';
+import WaterlineEntity from '../interfaces/waterlineORM';
+import GroupAP from './GroupAP';
+import { OptionalAll } from '../interfaces/toolsTS';
+import { WidgetConfig } from '../lib/widgets/widgetHandler';
 declare let attributes: {
-    id: number;
     login: string;
     fullName: string;
     email: string;

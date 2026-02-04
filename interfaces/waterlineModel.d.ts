@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { QueryBuilder, WaterlinePromise, CRUDBuilder, UpdateBuilder, Callback } from "waterline";
 import { OptionalAll, RequiredField } from "./toolsTS";
 type or<T> = {
