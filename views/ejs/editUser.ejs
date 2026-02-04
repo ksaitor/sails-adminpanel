@@ -152,6 +152,7 @@
 
             <input class="clr-input" type="hidden" name="_csrf" value="<%= _csrf %>"/>
 
+            <div id="form-error" class="hidden text-sm font-medium text-red-600 dark:text-red-400"></div>
             <p>
                 <button class="btn btn-green" id="submit" onclick="submitForm()">
                     <%= __("Save") %>
@@ -187,9 +188,14 @@
 	});
 
 	function submitForm() {
+		var errorEl = document.getElementById('form-error');
 		if ($('#userPassword').val() !== $('#repeatUserPassword').val()) {
-			alert('Values in "password" and "repeatPassword" fields should be the same')
+			if (errorEl) {
+				errorEl.textContent = '<%= __("Passwords do not match") %>';
+				errorEl.classList.remove('hidden');
+			}
 		} else {
+			if (errorEl) errorEl.classList.add('hidden');
 			$("#editUserForm").submit();
 		}
 	}

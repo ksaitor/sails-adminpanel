@@ -1,18 +1,20 @@
 <div class="alerts pl-12 md:pl-3 pr-16 max-w-[1144px]">
     <% if (adminpanel.viewHelper.hasMessages(req, 'adminError')) { %>
         <% req.session.messages.adminError.forEach(function(msg) { %>
-            <div class="alert bg-red-600 rounded font-medium mt-8"><div class="alert-items"><div class="alert-item flex gap-2 p-2 text-white"><div class="alert-icon-wrapper"><i class="las la-exclamation-triangle text-sm"></i></div><span class="alert-text">
-                <%= __(msg) %>
-            </span></div></div></div>
+            <div class="mt-6 flex items-center gap-3 rounded-lg border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-900/30 px-4 py-3 text-red-800 dark:text-red-200" role="alert">
+                <i class="las la-exclamation-circle text-xl flex-shrink-0"></i>
+                <span class="text-sm font-medium flex-1"><%= __(msg) %></span>
+            </div>
             <% req.session.messages.adminError = req.session.messages.adminError.filter(function(elem){return elem !== msg}) %>
         <% }) %>
     <% } %>
 
     <% if (adminpanel.viewHelper.hasMessages(req, 'adminSuccess')) { %>
         <% req.session.messages.adminSuccess.forEach(function(msg) { %>
-            <div class="alert bg-green-600 rounded font-medium mt-8"><div class="alert-items"><div class="alert-item flex gap-2 p-2 text-white"><div class="alert-icon-wrapper"><i class="las la-thumbs-up text-sm"></i></div><span class="alert-text">
-                <%= __(msg) %>
-            </span></div></div></div>
+            <div class="mt-6 flex items-center gap-3 rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-900/30 px-4 py-3 text-green-800 dark:text-green-200" role="alert">
+                <i class="las la-check-circle text-xl flex-shrink-0"></i>
+                <span class="text-sm font-medium flex-1"><%= __(msg) %></span>
+            </div>
             <% req.session.messages.adminSuccess = req.session.messages.adminSuccess.filter(function(elem){return elem !== msg}) %>
         <% }) %>
     <% } %>

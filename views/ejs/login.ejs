@@ -18,14 +18,14 @@
 <body>
 
 <div class="bg-gray-50 dark:bg-slate-800 dark:text-slate-100">
-    <div class="flex min-h-screen items-center justify-center bg-gradient-to-tr from-purple-400 dark:from-slate-700 via-pink-500 dark:via-slate-900 to-red-500 dark:to-slate-800">
+    <div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-700 dark:from-slate-700 via-slate-800 dark:via-slate-900 to-slate-900 dark:to-slate-800">
         <form class="rounded-2xl flex-col dark:bg-slate-900/70 bg-white dark:bg-slate-900/70 flex w-4/12 lg:w-6/12 md:w-7/12 xs:w-11/12 shadow-2xl"
               method="post" action="/admin/model/userap/login">
             <%- include("mixin/alerts") %>
-            <div class="flex-1 p-6">
-                <div class="mb-2">
-                    <h3 class="font-medium"><%= __("Welcome") %>!</h3>
-                    <p>
+            <div class="flex-1 p-8">
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold"><%= __("Welcome") %>!</h3>
+                    <p class="text-gray-500 dark:text-slate-400 mt-1">
                         <%= __("Please log in") %>
                     </p>
                 </div>
@@ -58,10 +58,10 @@
                         </div>
                     </div>
                 </div>
-                <p>
-                    <button class="inline-flex justify-center items-baseline gap-1 whitespace-nowrap focus:outline-none transition-colors cursor-pointer rounded border py-2 px-3 text-white bg-blue-500 dark:bg-blue-700 dark:hover:text-slate-300 font-medium border-green-500 dark:border-gray-900 hover:bg-blue-700 dark:hover:bg-blue-900"
+                <div class="mt-2">
+                    <button class="w-full inline-flex justify-center items-center gap-2 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors cursor-pointer rounded-lg border border-transparent py-3 px-4 text-white bg-blue-600 dark:bg-blue-700 font-medium hover:bg-blue-700 dark:hover:bg-blue-800"
                             type="submit"><%= __("Log in") %></button>
-                </p>
+                </div>
             </div>
         </form>
     </div>

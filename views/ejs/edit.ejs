@@ -91,8 +91,7 @@
                     <input class="clr-input" type="hidden" name="_csrf" value="<%= _csrf %>"/>
                 </div>
             <% } %>
-            <span id="error-btn-submit-text"
-                  style="display: none"><b>One or more fields are filled in incorrectly</b></span>
+            <div id="error-btn-submit-text" class="hidden text-sm font-medium text-red-600 dark:text-red-400"><%= __("One or more fields are filled in incorrectly") %></div>
             <p>
                 <button class="btn btn-green" id="submit" onclick="submitForm()">
                     <%= __("Save") %>
@@ -110,6 +109,15 @@
 	}
 	checkInitSubmitFormStatus();
 
+	function showFormError(msg) {
+		var el = document.getElementById('error-btn-submit-text');
+		if (el) {
+			el.textContent = msg;
+			el.classList.remove('hidden');
+			setTimeout(function() { el.classList.add('hidden'); }, 5000);
+		}
+	}
+
 	function submitForm() {
 
 		// Assign JSONEditor value to form textarea
@@ -118,13 +126,12 @@
 				var json = jsonEditor[id].get();
 				$('#form-' + id).val(JSON.stringify(json));
 			} catch (e) {
-				alert('JSON is invalid.');
+				showFormError('<%= __("JSON is invalid.") %>');
 				$('#form-' + id).show().focus().hide();
 				jsonEditor[id].focus();
 				return false;
 			}
 		}
-		;
 		for (var id in tables) {
 			try {
 				var schema = tables[id].getSchema();
@@ -148,7 +155,7 @@
 				}
 				$('#form-' + id).val(JSON.stringify(table));
 			} catch (e) {
-				alert('Table is invalid!');
+				showFormError('<%= __("Table data is invalid.") %>');
 				return false;
 			}
 		}
